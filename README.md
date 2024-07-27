@@ -6,7 +6,7 @@ This project demonstrates how to utilize RealityKit for rendering 3D content wit
 <img src="video.gif">
 
 # Requirements
-* iOS 16
+* iOS 16 or later.
 
 # Installation
 
