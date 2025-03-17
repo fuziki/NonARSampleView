@@ -3,7 +3,7 @@
 NonARSampleView is a sample implementation using RealityKit in non-AR mode.  
 This project demonstrates how to utilize RealityKit for rendering 3D content without requiring AR capabilities.
 
-<img src="video.gif">
+<img src="docs/video.gif">
 
 # Requirements
 * iOS 16 or later.
