@@ -1,0 +1,33 @@
+{
+  "A653E0E7-4253-436D-988D-BF124ED16B25" : {
+    "objectMetadataList" : [
+      [
+        "A653E0E7-4253-436D-988D-BF124ED16B25",
+        "Root",
+        "ToyBiplane"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "A653E0E7-4253-436D-988D-BF124ED16B25",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "A653E0E7-4253-436D-988D-BF124ED16B25",
+        "Root",
+        "SkySphere"
+      ],
+      {
+        "disallowsFraming" : true,
+        "isExpanded" : false,
+        "isLocked" : false
+      }
+    ]
+  }
+}

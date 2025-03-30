@@ -1,29 +1,25 @@
-//
-//  NonARSampleView.swift
-//
-//
-//  Created by fuziki on 2024/07/23.
-//
-
+import Foundation
 import RealityKit
 import SwiftUI
 
-public struct NonARSampleView: View {
-    @StateObject private var vm: NonARSampleViewModel
-    private var postEffectHandler: ((ARView.PostProcessContext) -> Void)?
+/// Bundle for the NonARSampleView project
+public let nonARSampleViewBundle = Bundle.module
 
-    public init(modelURL: URL?) {
-        _vm = .init(wrappedValue: .init(modelURL: modelURL))
+@MainActor
+public struct NonARSampleView: View {
+    @State var vm: NonARSampleViewModel
+    private var updateHandler: ((ARView) -> Void)?
+
+    public init() {
+        _vm = .init(wrappedValue: .init())
     }
 
     public var body: some View {
         ARViewWrapper { arView in
             vm.configure(arView: arView)
-        } postEffectHandler: { context in
-            if let postEffectHandler {
-                postEffectHandler(context)
-            } else {
-                vm.postProcess(context: context)
+        } updateHandler: { arView in
+            if let updateHandler {
+                updateHandler(arView)
             }
         }
         .gesture(DragGesture(minimumDistance: 0)
@@ -37,26 +33,20 @@ public struct NonARSampleView: View {
         .overlay {
             if let errorText = vm.errorText {
                 Text(errorText)
-                    .foregroundStyle(Color.white)
-                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Color.red)
+                    .background(Color.white)
             }
         }
     }
 
-    public func postEffect(handler: @escaping (ARView.PostProcessContext) -> Void) -> some View {
-        var this = self
-        this.postEffectHandler = handler
-        return this
+    public func update(updateHandler: @escaping ((ARView) -> Void)) -> Self {
+        var `self` = self
+        self.updateHandler = updateHandler
+        return self
     }
 }
 
 #Preview {
-    let url = Bundle.module.url(forResource: "toy_biplane_idle", withExtension: "usdz")
-    return NonARSampleView(modelURL: url)
-        .postEffect { context in
-            let blitEncoder = context.commandBuffer.makeBlitCommandEncoder()
-            blitEncoder?.copy(from: context.sourceColorTexture, to: context.targetColorTexture)
-            blitEncoder?.endEncoding()
-        }
+    NonARSampleView()
         .ignoresSafeArea()
 }
